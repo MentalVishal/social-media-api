@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Media API Documentation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 25px;
+        padding: 0;
+      }
+
+      h1 {
+        color: #de6565;
+        text-decoration: underline;
+        margin: 11px;
+      }
+
+      h2 {
+        color: #555;
+      }
+
+      h3 {
+        color: #777;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      .endpoint {
+        margin-bottom: 20px;
+      }
+
+      code {
+        font-family: Consolas, monospace;
+        font-size: 14px;
+        background-color: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Social Media API Documentation</h1>
+    <p>
+      Welcome to the documentation for the Social Media API. This API provides
+      functionalities for user registration, login, posting content,
+      following/unfollowing users, feed post and more.
+    </p>
+
+    <h2>Getting Started</h2>
+    <p>To get started with the Social Media API, follow the steps below:</p>
+
+    <h3>Prerequisites</h3>
+    <ul>
+      <li>Node.js installed on your device</li>
+      <li>
+        MongoDB installed and running locally or access to a MongoDB instance
+      </li>
+    </ul>
+
+    <h3>Installation</h3>
+    <ol>
+      <li>Clone the repository:</li>
+      <code
+        >git clone
+        &lt;https://github.com/MentalVishal/social-media-api&gt;</code
+      >
+      <li>Install dependencies:</li>
+      <code>cd social-media-api</code>
+      <code>npm install</code>
+      <li>Start the server:</li>
+      <code>npm start</code>
+    </ol>
+
+    <p>
+      The server will start running on <code>http://localhost:8080</code> by
+      default.
+    </p>
+
+    <h2>API Endpoints</h2>
+    <p>Here are the available endpoints and their functionalities:</p>
+
+    <div class="endpoint">
+      <h3>User Management</h3>
+      <ul>
+        <li>
+          <strong>POST</strong> <code>/register</code>: Register a new user.
+        </li>
+        <li><strong>POST</strong> <code>/login</code>: Login user.</li>
+        <li><strong>GET</strong> <code>/users</code>: Get All Users</li>
+        <li>
+          <strong>POST</strong> <code>/users/blacklist/:userId</code>: Blacklist
+          a user.
+        </li>
+        <li>
+          <strong>POST</strong> <code>/users/unblacklist/:userId</code>: Remove
+          a user from the blacklist.
+        </li>
+      </ul>
+    </div>
+
+    <div class="endpoint">
+      <h3>Post Management</h3>
+      <ul>
+        <li><strong>POST</strong> <code>/post</code>: Create a new post.</li>
+        <li>
+          <strong>PATCH</strong> <code>/updatePost</code>: Update an existing
+          post.
+        </li>
+        <li>
+          <strong>DELETE</strong> <code>/deletePost/:postId</code>: Delete a
+          post.
+        </li>
+      </ul>
+    </div>
+
+    <div class="endpoint">
+      <h3>Following/Unfollowing Users</h3>
+      <ul>
+        <li>
+          <strong>POST</strong> <code>/follow/:userId</code>: Follow a user.
+        </li>
+        <li>
+          <strong>POST</strong> <code>/unfollow/:userId</code>: Unfollow a user.
+        </li>
+      </ul>
+    </div>
+
+    <div class="endpoint">
+      <h3>Feed Retrieval</h3>
+      <ul>
+        <li>
+          <strong>GET</strong> <code>/feed</code>: Retrieve posts from users you
+          follow.
+        </li>
+      </ul>
+    </div>
+
+    <div class="endpoint">
+      <h3>GraphQL</h3>
+      <p>
+        To explore the API using GraphQL, you can access the GraphQL Playground
+        at the following endpoint:
+      </p>
+      <code>/graphql</code>
+    </div>
+
+    <h2>Testing the API</h2>
+    <p>
+      You can test the API endpoints using tools like Postman or by sending
+      requests directly from your application. Here's how you can test the
+      endpoints:
+    </p>
+
+    <ol>
+      <li>Register a new user:</li>
+      <pre>
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "username": "exampleuser",
+  "email": "user@example.com",
+  "password": "password123"
+}</pre
+      >
+      <li>Login user:</li>
+      <pre>
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password123"
+}</pre
+      >
+      <li>Retrieve all users:</li>
+      <pre>
+    GET http://localhost:8080/users
+    Authorization: Bearer &lt;token&gt;
+  </pre
+      >
+      <li>
+        Blacklist a user:
+        <pre>
+  POST http://localhost:8080/users/blacklist/:userId
+  Authorization: Bearer <token>
+  Content-Type: application/json
+  
+  {
+    "userId": "12345"
+  }
+        </pre>
+      </li>
+      <li>
+       Remove a user from the blacklist:
+        <pre>
+  POST http://localhost:8080/users/unblacklist/:userId
+  Authorization: Bearer <token>
+  Content-Type: application/json
+  
+  {
+    "userId": "12345"
+  }
+        </pre>
+      </li>
+      <li>Create a new post:</li>
+      <pre>
+POST http://localhost:8080/post
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json
+
+{
+  "content": "This is a new post."
+}</pre
+      >
+      <p>
+        Replace <code>&lt;token&gt;</code> with the JWT token obtained after
+        login.
+      </p>
+
+      <li>Update an existing post:</li>
+      <pre>
+    PATCH http://localhost:8080/updatePost
+    Authorization: Bearer &lt;token&gt;
+    Content-Type: application/json
+
+    {
+      "postId": "123456",
+      "content": "Updated content for the post."
+    }
+  </pre
+      >
+      <li>Delete a post:</li>
+<pre>
+DELETE http://localhost:8080/deletePost/:postId
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "postId": "12345"
+}
+</pre>
+
+      <li>Follow a user:</li>
+      <pre>
+        POST http://localhost:8080/follow/:userId
+        Authorization: Bearer &lt;token&gt;
+      </pre>
+
+      <li>Unfollow a user:</li>
+      <pre>
+        POST http://localhost:8080/unfollow/:userId
+        Authorization: Bearer &lt;token&gt;
+      </pre>
+
+      <li>Retrieve posts from users you follow:</li>
+      <pre>
+        GET http://localhost:8080/feed
+        Authorization: Bearer &lt;token&gt;
+      </pre>
+    </ol>
+
+    <h1>API Endpoints Explanation</h1>
+
+    <div class="endpoint">
+      <h2>POST <code>/register</code>: Register a new user.</h2>
+      <p>
+        This endpoint allows a user to create a new account by providing a
+        username, email, and password in the request body. Upon successful
+        registration, the user's information is stored in the database.
+      </p>
+    </div>
+
+    <div class="endpoint">
+      <h2>POST <code>/login</code> : Login user.</h2>
+      <p>
+        Users can authenticate themselves by sending a POST request with their
+        email and password. If the provided credentials match an existing user's
+        credentials in the database, the server responds with a JWT (JSON Web
+        Token) that can be used for authentication in subsequent requests.
+      </p>
+    </div>
+
+    <div class="endpoint">
+      <h2>GET <code>/users</code> : Get All Users.</h2>
+      <p>
+        This endpoint retrieves a list of all users registered in the system. It
+        requires authentication via a JWT token in the request headers to ensure
+        only authorized users can access the user data.
+      </p>
+    </div>
+
+    <div class="endpoint">
+      <h2>POST <code>/users/blacklist/:userId</code>: Blacklist a user.</h2>
+      <p>
+        This endpoint allows an administrator to blacklist a user by providing the user's ID in the request URL. Once blacklisted, the user may be restricted from accessing certain features or functionalities within the application.
+      </p>
+    </div>
+    
+    <div class="endpoint">
+      <h2>POST <code>/users/unblacklist/:userId</code>: Remove a user from the blacklist.</h2>
+      <p>
+        This endpoint allows an administrator to remove a user from the blacklist by providing the user's ID in the request URL. Once removed from the blacklist, the user regains access to the application's features and functionalities.
+      </p>
+    </div>
+    
+
+    <div class="endpoint">
+      <h2>POST <code>/post</code> : Create a new post.</h2>
+      <p>
+        Users can create new posts by sending a POST request with the content of
+        the post in the request body. The server associates the post with the
+        authenticated user and stores it in the database.
+      </p>
+    </div>
+
+    <div class="endpoint">
+      <h2>POST <code>/updatePost/:postId</code>: Update a post.</h2>
+      <p>
+        This endpoint allows a user or an admin to update a post by providing the post ID in the request URL. The requester must be the owner of the post or an admin to perform the update.
+      </p>
+    </div>
+    
+    <div class="endpoint">
+      <h2>DELETE <code>/deletePost/:postId</code>: Delete a post.</h2>
+      <p>
+        This endpoint allows a user or an admin to delete a post by providing the post ID in the request URL. The requester must be the owner of the post or an admin to perform the delete operation.
+      </p>
+    </div>
+    
+
+    <div class="endpoint">
+      <h2>POST <code>/follow/:userId</code> : Follow a user.</h2>
+      <p>
+        This endpoint allows a user to follow another user. The
+        <code>:userId</code> parameter specifies the ID of the user to follow.
+        Authentication is required, and upon successful follow, the relationship
+        is established in the database.
+      </p>
+    </div>
+
+    <div class="endpoint">
+      <h2>POST <code>/unfollow/:userId</code> : Unfollow a user.</h2>
+      <p>
+        Users can unfollow another user by sending a POST request with the ID of
+        the user to unfollow specified in the URL parameter
+        <code>:userId</code>. The server verifies the relationship and removes
+        it from the database upon successful unfollow.
+      </p>
+    </div>
+
+    <div class="endpoint">
+      <h2>GET <code>/feed</code> : Retrieve posts from users you follow.</h2>
+      <p>
+        This endpoint fetches posts from users whom the authenticated user
+        follows. It requires authentication via a JWT token. The server
+        retrieves the relevant posts from the database and returns them as a
+        response.
+      </p>
+    </div>
+
+    <h2>GraphQL</h2>
+    <p>
+      The API also supports GraphQL for querying data. You can access the
+      GraphQL Playground at <code>http://localhost:8080/graphql</code> and
+      explore the available queries and mutations.
+    </p>
+
+    <h2>Contribution</h2>
+    <p>
+      Contributions to this project are welcome! If you find any issues or have
+      suggestions for improvements, feel free to open an issue or submit a pull
+      request.
+    </p>
+
+    <h2>License</h2>
+    <p>
+      This project is licensed under the <a href="LICENSE">MentalVishal</a>.
+    </p>
+  </body>
+</html>

@@ -9,6 +9,8 @@ const schema = buildSchema(`
     posts: [Post!]
     following: [User!]
     followers: [User!]
+    isAdmin: Boolean!
+    blacklisted: Boolean!
   }
 
   type Post {
